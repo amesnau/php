@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>>
+</head>
+
+<body>
+    <script>
+        function enviar() {
+            var monto = document.getElementById("valor").value;
+            var radiouno = document.getElementById("uno").checked;
+            var radiodos = document.getElementById("dos").checked;
+            var radiotres = document.getElementById("tres").checked;
+            if (radiouno) {
+                monto = monto / 166.386;
+            } else if (radiodos) {
+                monto = monto / 180.386;
+            } else {
+                monto = monto / 2.047;
+            }
+            document.getElementById("resultado").innerHTML = `El resultado es ${monto}`;
+        }
+    </script>
+    <form>
+        Introduzca la cantidad: <input type="text" id="valor" size="10" id="cantidad">
+        <button type="button" onclick="enviar()">Ok</button>
+        <br />
+        Seleccione el tipo de conversion: <br />
+        <input id="uno" type="radio" name="conv" value="1" checked>Euros <br>
+        <input id="dos" type="radio" name="conv" value="2"> dollars <br>
+        <input id="tres" type="radio" name="conv" value="3">dracmas <br>
+    </form>
+    <span id="resultado"></span>
+</body>
+
+</html>
