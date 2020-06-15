@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/sanitize.css"> -->
+    <title>Document</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 1rem;
+            justify-items: stretch;
+            align-items: stretch;
+            background-color: rgb(250, 250, 244);
+        }
+
+        .clase {
+            border: 1.5px solid brown;
+            text-align: left;
+            color: blue;
+            background-blend-mode: lighten;
+            background-repeat: no-repeat;
+            background-size: 135%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+
+        }
+
+        .clase:hover {
+            transform: rotateY(180deg);
+        }
+
+        .clase-front,
+        .clase-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+
+        .centrado {
+            text-align: center;
+            font-size: 1.8rem;
+            background-color: rgba(216, 213, 213, 0.7);
+        }
+
+        p {
+            margin-left: .625rem;
+            margin-right: .625rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="myDiv">
+
+    </div>
+    <button type="button" id="boton" onclick="loadXMLDoc()">Presione</button>
+    <script>
+        window.onload = function () {
+            // Crea objeto http para leer bases de datos
+            var xmlhttp;
+            var txt, x, i;
+            xmlhttp = new XMLHttpRequest();
+            //Lectura del estado del request con ajax
+            xmlhttp.onreadystatechange = function () {
+                //Si se recibió favorablemente el archivo
+                if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+                    // se creó fichero con código JSON
+                }
+
+            }
+            //Apertura y envío de request del archivo con ajax
+            xmlhttp.open("GET", "frank2.php", true);
+            xmlhttp.send();
+        }
+        function loadXMLDoc() {
+            // Se crea otro objeto para la lectura del fichero que contiene el código JSON
+            var xmlhttp1 = new XMLHttpRequest();
+            var file = "mycds.json";
+
+            xmlhttp1.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    cdsinventory = JSON.parse(this.responseText);
+                    // Crea en variable main nodo div class container
+                    // y lo agrega al DOM generando el grid
+                    var index = [];
+                    var url = [];
+                    // Se crea objeto para crear elemento div
+                    main = document.createElement("MyDiv");
+                    // Se definen los atributos del elemento html
+                    main.setAttribute("id", "MyDiv");
+                    main.setAttribute("class", "container");
+                    // Se agrega al DOM
+                    document.body.appendChild(main);
+                    for (let i in cdsinventory) {
+                        // Elementos p creados
+                        index[i] = i;
+                        p = document.createElement("p");
+                        p1 = document.createElement("p");
+                        p2 = document.createElement("p");
+                        p3 = document.createElement("p");
+                        p4 = document.createElement("p");
+                        p5 = document.createElement("p");
+                        p6 = document.createElement("p");
+                        nodo = document.createElement("div");
+                        nodo.className = "clase";
+                        nodo.id = "nodo" + i;
+                        // Se crean eventos para la entrada y salida de los div
+                        nodo.addEventListener("mouseenter", myFunction, false);
+                        nodo.addEventListener("mouseleave", myFunction, false);
+                        p.textContent = cdsinventory[i]["title"];
+                        p.className = "centrado";
+                        // Se actualizan los textos a mostrar en los elementos p
+                        p1.textContent = 'Artist: ' + cdsinventory[i]["artist"];
+                        p2.textContent = 'Company: ' + cdsinventory[i]["company"];
+                        p3.textContent = 'Year: ' + cdsinventory[i]["titleyear"];
+                        // p4.textContent = "Price: :" + cdsinventory[i]["price"];
+                        p5.textContent = "Country:" + cdsinventory[i]["country"];
+                        url[i] = cdsinventory[i]["imagen"];
+                        // p6.textContent = "Available: " + cdsinventory[i]["available"];
+                        // Se agregan los elementos recien creados
+                        nodo.id = i;
+                        main.appendChild(nodo);
+                        nodo.appendChild(p);
+                        nodo.appendChild(p1);
+                        nodo.appendChild(p2);
+                        nodo.appendChild(p3);
+                        nodo.appendChild(p4);
+                        nodo.appendChild(p5);
+                        nodo.appendChild(p6);
+                        aver = document.getElementsByClassName("clase");
+                        imagen = `"./images/${url[i]}"`;
+                        aver[i].style.backgroundImage = `url(${imagen})`;
+                    }
+
+                }
+            };
+
+            xmlhttp1.open("GET", file, true);
+            xmlhttp1.send();
+
+        }
+        function myFunction(e) {
+            // var es_chrome = navigator.userAgent.toLowerCase().indexOf('edg') > -1;
+            let es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+let es_evento=e.type;
+            if (es_firefox) {
+                console.log(e.type, e.originalTarget.id);
+                // console.log("El navegador que se está utilizando es Edge");
+            } else {
+                console.log(e.type, e.currentTarget.id);
+
+            }
+        }
+        switch (es_evento) {
+            case "mouseenter":
+                
+                break;
+            case "mouseleave":
+                
+                break;
+        
+            default:
+                break;
+        }
+
+    </script>
+
+</body>
+
+</html>
