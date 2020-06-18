@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
     <?php
 
     $server = "localhost";
@@ -48,16 +38,13 @@
     $close = mysqli_close($conexion)
         or die("Ha sucedido un error inesperado en la desconexion de la base de datos");
     $file = 'mycds.json';
-    $json_string = json_encode($cds);
-    file_put_contents($file, $json_string);
+    // $json_string = json_encode($cds);
+    // file_put_contents($file, $json_string);
 
 
     //Creamos el JSON
-    // echo json_encode($json_string);
+    echo json_encode($cds);
 
 
 
     ?>
-</body>
-
-</html>
