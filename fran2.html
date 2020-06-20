@@ -73,6 +73,7 @@
 <body>
     <button type="button" id="boton" onclick="loadXMLDoc()">Presione</button>
     <script>
+        var url = [];
         window.onload = function () {
             // Crea objeto http para leer bases de datos
             var xmlhttp;
@@ -96,7 +97,6 @@
             // Crea en variable main nodo div class container
             // y lo agrega al DOM generando el grid
             var index = [];
-            var url = [];
             // Se crea objeto para crear elemento div
             main = document.createElement("MyDiv");
             // Se definen los atributos del elemento html
@@ -129,14 +129,18 @@
                 p2.id = "d" + i + "p2";
                 p3.textContent = 'Year: ' + cdsInventory[i]["titleyear"];
                 p3.id = "d" + i + "p3";
-                p4.textContent = "Price: :" + cdsInventory[i]["price"];
+                p4.textContent = "Price: : " + cdsInventory[i]["price"];
                 p4.id = "d" + i + "p4";
                 p4.style.display = "none";
-                p5.textContent = "Country:" + cdsInventory[i]["country"];
+                p5.textContent = "Country: " + cdsInventory[i]["country"];
                 p5.id = "d" + i + "p5";
                 p6.textContent = "Available: " + cdsInventory[i]["available"];
                 p6.id = "d" + i + "p6";
                 p6.style.display = "none";
+                if (cdsInventory[i]["available"] == "0") {
+                    p4.style.color = "red";
+                    p6.style.color = "red";
+                }
 
                 url["d" + i] = cdsInventory[i]["imagen"];
                 // Se agregan los elementos recien creados
@@ -180,6 +184,9 @@
                 elementoP3.display = "block";
                 elementoP5 = document.getElementById(division + "p5").style;
                 elementoP5.display = "block";
+                aver = document.getElementById(division);
+                imagen = `"./images/${url[division]}"`;
+                aver.style.backgroundImage = `url(${imagen})`;
             } else {
                 cdVisualizado.className = "clase rotar";
                 elementoP = document.getElementById(division + "p0");
@@ -200,6 +207,8 @@
                 elementoP6.className = "rotarp";
                 elementoP4 = document.getElementById(division + "p4");
                 elementoP4.className = "rotarp";
+                aver = document.getElementById(division);
+                aver.style.backgroundImage = `none`;
 
             }
         }
