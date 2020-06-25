@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Document</title>
+      <style>
+         body {
+            font-family: verdana, arial, sans-serif;
+            font-size: 10pt;
+         }
+
+         h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #0066cc;
+         }
+
+         td.cabecera {
+            font-size: 10pt;
+            font-weight: bold;
+            color: white;
+            background: #0066cc;
+            text-align: left;
+         }
+         td {
+            font-size: 10pt;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>encuesta</h1>
+      <p>el precio de la vivienda seguira subiendo al ritmo actual?</p>
+      <form action="encuesta.php" method="POST">
+         <input type="radio" name="voto" checked value="si" />Si <br /><br />
+         <input type="radio" name="voto" value="no" />No <br /><br />
+         <input type="submit" name="enviar" value="votar" />
+      </form>
+   </body>
+</html>
